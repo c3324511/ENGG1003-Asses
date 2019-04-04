@@ -8,11 +8,17 @@ int main() {
     
     const char str1[100] = "THIS IS TEXT";
     char str2[100];
-    strcpy(str2, str1);
     
-    int i=0, k;
     
-    start:printf("Enter Encryption Key:");
+    int i=0, k, r=0;
+    
+    printf("\nEnter Eccryption Text: ");    
+    scanf("%[^\n]", str2;
+    
+    
+    
+    
+    start:printf("\nEnter Encryption Key:");
     scanf("%d", &k);
     
     if(k<0 || k>26){
