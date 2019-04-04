@@ -45,20 +45,20 @@ int main() {
     for(i=0; i<=strlen(str2); i++){
         
         if(str2[i] == 32){
-            continue;
+            continue;   //32 is ASCII whitespace so this tells the code if it detects whitespace to not encrypt it.
         }
         else if(str2[i]>=65 && str2[i]<=90){
-        str2[i] = str2[i]-65;
-        str2[i] = ((str2[i] + k)%26);
-        str2[i] = str2[i]+65;
+        str2[i] = str2[i]-65;  //Moves ASCII values to between 0 and 26 by substracting ASCII value for A
+        str2[i] = ((str2[i] + k)%26); //Rotates 13 places around alphabet. The % ensures it works for letters later by skipping back to start of alphabet
+        str2[i] = str2[i]+65; //Moves values back to ASCII values.
         }
 
     }
     
     
-    printf("%s", str2);
+    printf("%s", str2);  //Prints the String
     
     
     
-    return 0;
+    return 0; //END of code
 }
