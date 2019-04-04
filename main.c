@@ -10,7 +10,18 @@ int main() {
     char str2[100];
     strcpy(str2, str1);
     
-    int i=0, k=13;
+    int i=0, k;
+    
+    start:printf("Enter Encryption Key:");
+    scanf("%d", &k);
+    
+    if(k<0 || k>26){
+        printf("Key must be between 0 and 26\n");
+        goto start;
+    }
+    else if(k>=0 && k<=26){
+        
+    }
     
     for(i=0; i<=strlen(str2); i++){
         
