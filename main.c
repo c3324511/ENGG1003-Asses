@@ -13,7 +13,7 @@ int main() {
     int i=0, k, r=0;
     
     printf("\nEnter Eccryption Text: ");    
-    scanf("%[^\n]", str2;
+    scanf("%[^\n]", str2);
     
     
     
