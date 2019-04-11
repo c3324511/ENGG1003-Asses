@@ -4,13 +4,12 @@
 
 int main(){
     
-                printf("AAAAAAAAAAHHHHHHHHHHH\n");
+
     
     for(int i = 0; i<=strlen(SubEncrypt); i++){
         
         switch(SubEncrypt[i]){
             case 'a': SubEncrypt[i] = 'q';
-
                 break;
             case 'b': SubEncrypt[i] = 'w';
                 break;
