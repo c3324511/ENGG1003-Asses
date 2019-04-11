@@ -35,8 +35,14 @@ int main() {
     
     for(i=0; i<=strlen(str2); i++){
         
-        if(str2[i] == 32){
+        if(str2[i] <'A'){
             continue;   //32 is ASCII whitespace so this tells the code if it detects whitespace to not encrypt it.
+        }
+        else if(str2[i]>'Z' && str2[i]<'a'){
+            continue;
+        }
+        else if(str2[i]>'z'){
+            continue;
         }
         else if(str2[i]>=65 && str2[i]<=90){
             str2[i] = str2[i]-65;  //Moves ASCII values to between 0 and 26 by substracting ASCII value for A
