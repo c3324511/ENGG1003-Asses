@@ -10,7 +10,7 @@ int main(){
         SubEncrypt[i] = EncryptKey[ ((int) SubEncrypt[i]) - ((int) 'a')];
         }
         else if(SubEncrypt[i]>='A' && SubEncrypt[i]<='Z'){
-        SubEncrypt[i] = EncryptKey[ ((int) SubEncrypt[i]) - ((int) 'A')];
+        SubEncrypt[i] = EncryptKey[ ((int) SubEncrypt[i]) - ((int) 'A' )  + 25];
         }
         
 
