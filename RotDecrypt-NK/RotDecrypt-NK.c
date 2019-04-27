@@ -4,25 +4,25 @@
 
 int main(){
     
-    char RotDecryptNK[] = "GDKKN VNQKC";
+    char RotDecryptNK[] = "WTAAD LDGAS";    
     
         
     int i=0;
     
     for(int k=1; k<=25; k++){
         
-        for(i=0; i<=1000; i++){
+        for(i=0; i<strlen(RotDecryptNK); i++){
         
-            if(RotDecryptNK[i]>=64 && RotDecryptNK[i]<=90){
-                RotDecryptNK[i] = RotDecryptNK[i]-65+26;
-                RotDecryptNK[i] = ((RotDecryptNK[i] - k)%26);
-                RotDecryptNK[i] = RotDecryptNK[i]+65; 
+            if(RotDecryptNK[i]>=65 && RotDecryptNK[i]<=90){
+                RotDecryptNK[i] = ((RotDecryptNK[i]-65+1)%26)+65;
+     
                 
             }   
 
         }   
+        int x=26 - k;
         
-        printf("\n%d: %s", k, RotDecryptNK);
+        printf("\n%d: %s", x, RotDecryptNK);
     }
 
 
