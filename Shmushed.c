@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
 
 
 int main(){
@@ -43,7 +43,7 @@ int main(){
             printf("/n Enter Encryption Key:");
             scanf("%d", &k);
             
-            for(i=0; i<=strlen(EncryptionText); i++){
+            for(int i=0; i<=strlen(EncryptionText); i++){
         
                 if(EncryptionText[i] <'A'){
                     continue;   //32 is ASCII whitespace so this tells the code if it detects whitespace to not encrypt it.
@@ -71,6 +71,10 @@ int main(){
              return 0;
         }
         else if(y == 2){
+            
+            char EncryptKey[26];
+            printf("\n Enter Encryption Key:");
+            scanf("%s", EncryptKey);
 
             for(int i = 0; i<=strlen(EncryptionText); i++){
             
@@ -82,8 +86,88 @@ int main(){
                 }
             }
     
-    printf("%s", EncryptionText);  
+            printf("%s", EncryptionText); 
+            return 0;
 
+        }
+    }
+    else if(x == 2){
+        
+        char DecryptionText[9999];
+        printf("\n Enter Text for Decryption:");
+        scanf("%[^\n]s", DecryptionText);  // this should read to newline but doesnt work properly in compilers?
+        
+        if(y == 1){
+            
+            int k=0;
+            printf("\nEnter Decryption Key:");
+            scanf("%d", &k);
+            
+            for(int i=0; i<=strlen(DecryptionText); i++){
+        
+                if(DecryptionText[i] == 32){
+                    continue;   //32 is ASCII whitespace so this tells the code if it detects whitespace to not encrypt it.
+                }
+                else if(DecryptionText[i]>=65 && DecryptionText[i]<=90){
+                    DecryptionText[i] = DecryptionText[i]-65 +26 ;  //Moves ASCII values to between 0 and 26 by substracting ASCII value for A
+                    DecryptionText[i] = ((DecryptionText[i] - k)%26); //Rotates k places inversely around alphabet. The %[mod operand] ensures it works for letters later by skipping back to start of alphabet
+                    DecryptionText[i] = DecryptionText[i]+65; //Moves values back to ASCII values.
+                }
+                else if(DecryptionText[i]>='a' && DecryptionText[i]<='z'){
+                    DecryptionText[i] = DecryptionText[i]-97+26; 
+                    DecryptionText[i] = ((DecryptionText[i] - k )%26);   
+                    DecryptionText[i] = DecryptionText[i]+97;
+                }
+        
+            }
+            
+            
+            printf("%s", DecryptionText);  //Prints the String
+              
+            return 0; //END of code
+        }
+        else if(y == 2){
+                
+            for(int k=1; k<=25; k++){                
+                for(int i=0; i<strlen(DecryptionText); i++){                
+                    if(DecryptionText[i]>=65 && DecryptionText[i]<=90){
+                        DecryptionText[i] = ((DecryptionText[i]-65+1)%26)+65;                       
+                    }   
+                }   
+                int x=26 - k;
+                printf("\n%d: %s", x, DecryptionText);
+            }
+        }
+        else if(y == 3){
+            
+            char SDecryptKey[26];
+            printf("Enter Decryption Key:");
+            scanf("%s", SDecryptKey);
+            
+            char DecryptionTextCopy[9999];
+    
+            for(int i=0; i<strlen(SDecryptKey); i++){
+                for(int j=0; j<strlen(DecryptionText); j++){
+                    if(SDecryptKey[i] == DecryptionText[j] ){
+                        DecryptionTextCopy[j] = i+1000+65; // To Put it outside ascii range so it doesnt get confused with other characters
+                    }
+                }
+            }
+            
+            for(int l=0; l<strlen(DecryptionText); l++){
+                if(DecryptionText[l]>='A' && DecryptionText[l]<='Z'){
+                    DecryptionTextCopy[l] = DecryptionTextCopy[l] - 1000;
+                }
+                else if(DecryptionText[l] == 32){
+                    DecryptionTextCopy[l] = 32;
+                }
+                
+            }
+            
+            printf("%s", DecryptionTextCopy);
+            
+            return 0;
+            
         }
     }
     
