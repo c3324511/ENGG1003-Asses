@@ -31,9 +31,60 @@ int main(){
         goto menu;
     }
     
+    
     if(x == 1){
-        printf("\n Enter Text for Encryption:");
         
+        char EncryptionText[9999];
+        printf("\n Enter Text for Encryption:");
+        scanf("%[^\n]s", EncryptionText);  // this should read to newline but doesnt work properly in compilers?
+        
+        if(y == 1){
+            int k=0;
+            printf("/n Enter Encryption Key:");
+            scanf("%d", &k);
+            
+            for(i=0; i<=strlen(EncryptionText); i++){
+        
+                if(EncryptionText[i] <'A'){
+                    continue;   //32 is ASCII whitespace so this tells the code if it detects whitespace to not encrypt it.
+                }
+                else if(EncryptionText[i]>'Z' && EncryptionText[i]<'a'){
+                    continue;
+                }
+                else if(EncryptionText[i]>'z'){
+                    continue;
+                }
+                else if(EncryptionText[i]>=65 && EncryptionText[i]<=90){
+                    EncryptionText[i] = EncryptionText[i]-65;  //Moves ASCII values to between 0 and 26 by substracting ASCII value for A
+                    EncryptionText[i] = ((EncryptionText[i] + k)%26); //Rotates 13 places around alphabet. The % ensures it works for letters later by skipping back to start of alphabet
+                    EncryptionText[i] = EncryptionText[i]+65; //Moves values back to ASCII values.
+                }
+                else if(EncryptionText[i]>='a' && EncryptionText[i]<='z'){
+                    EncryptionText[i] = EncryptionText[i]-97; 
+                    EncryptionText[i] = ((EncryptionText[i] + k)%26);   
+                    EncryptionText[i] = EncryptionText[i]+65;
+                }
+
+             }
+        
+             printf("%s", EncryptionText);  //Prints the String
+             return 0;
+        }
+        else if(y == 2){
+
+            for(int i = 0; i<=strlen(EncryptionText); i++){
+            
+                if(EncryptionText[i]>='a' && EncryptionText[i]<='z'){
+                EncryptionText[i] = EncryptKey[ ((int) EncryptionText[i]) - ((int) 'a')];
+                }
+                else if(EncryptionText[i]>='A' && EncryptionText[i]<='Z'){
+                EncryptionText[i] = EncryptKey[ ((int) EncryptionText[i]) - ((int) 'A' ) ]; 
+                }
+            }
+    
+    printf("%s", EncryptionText);  
+
+        }
     }
     
 }
