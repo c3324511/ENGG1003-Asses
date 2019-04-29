@@ -39,11 +39,11 @@ int main(){
     }
     
     /*
-     Here we just use a bit of flow control using if statetments to make it so only the selected part of the program runs. Works pretty much the same as the menu flow control, based on input values for x and y.
+     Here we just use a bit of flow control using if statements to make it so only the selected part of the program runs. Works pretty much the same as the menu flow control, based on input values for x and y.
      */
     
     
-    if(x == 1){
+    if(x == 1){ // if rotation selected
         
         /*
          Here imma just initialising the string and reading user input to the string. This is the text that will be encrypted.
@@ -54,7 +54,7 @@ int main(){
         printf("\n Enter Text for Encryption:"); //Prompts user to enter the text for encryption.
         scanf("%[^\n]s", EncryptionText);  // this should read to newline but doesnt work properly in compilers?
         
-        if(y == 1){
+        if(y == 1){ //if rotation encryption selected
             
             /*
              This section is for a rotation encryption. it works just by applying some maths to the ascii values of the numbers to rotate
@@ -92,7 +92,7 @@ int main(){
              printf("%s", EncryptionText);  //Prints the encrypted text
              return 0;  //ends the code run. dont want it to run the rest when it doesnt need to.
         }
-        else if(y == 2){
+        else if(y == 2){ //if sub encryption selected from the menu
             
             /*
              Here we got the substitution encryption. It works by doing some mathsy stuff and by using a letters value to tell it how far along the key string the replacement is, and to then replace it with that.
@@ -126,6 +126,10 @@ int main(){
         scanf("%[^\n]s", DecryptionText);  //reads text to encrypt from stdin.
         
         if(y == 1){ //if user selects rotation decryption with a key
+            
+            /*
+             Just ya basic rotation decryption here. Takes the text and the key, then cycles the text back by what the key is.
+             */
             
             int k=0; //initalises k to be used as the key
             printf("\nEnter Decryption Key:"); // prompts user to enter decryption key
@@ -199,18 +203,21 @@ int main(){
             }
             
             for(int l=0; l<strlen(DecryptionText); l++){ //just cycles through and makes each character back to its ascii value before it prints.
-                if(DecryptionText[l]>='A' && DecryptionText[l]<='Z' || DecryptionText[l]>='a' && DecryptionText[l]<='z'){
-                    DecryptionTextCopy[l] = DecryptionTextCopy[l] - 1000;
+                if(DecryptionText[l]>='A' && DecryptionText[l]<='Z' || DecryptionText[l]>='a' && DecryptionText[l]<='z'){ //only apllies if the original text had letters in the relevant position
+                    DecryptionTextCopy[l] = DecryptionTextCopy[l] - 1000; //brings back to ascii range
                 }
-                else if(DecryptionText[l] == 32){
+                else if(DecryptionText[l] == 32){ //if whitespace was originally there it makes it whitespace to  print
                     DecryptionTextCopy[l] = 32;
+                }
+                else{  // this bit is just so that everything else in the text remains unchaged i.e characters remain as they were
+                    DecryptionTextCopy[l] = DecryptionText[l];
                 }
                 
             }
             
-            printf("%s", DecryptionTextCopy);
+            printf("%s", DecryptionTextCopy); //prints decrypted text
             
-            return 0;
+            return 0; //ends code
             
         }
     }
