@@ -174,24 +174,32 @@ int main(){
                 printf("\n%d: %s", x, DecryptionText); // prints the number of the rotation from the original (so the key used), and the text produced for that key.
             }
         }
-        else if(y == 3){
+        else if(y == 3){ //if substitution decryption with key is selcted from menu
+        
+            /*
+             kk so this works basicall by going through the decryption key one letter at a time, then cycling through each letter of the text and seeing if the letter is the same as that letter of the key. 
+             Because the key is just for the alphabet from A to Z, if they are equal it replaces it with the letter corresponding to it by using its position in the key string. for example it starts with the first letter 
+             in the key string, which is what is used for 'A'. Because we are at the first letter in the string, it replaces any letters in the text that are equal to this with 0 (c starts counting at 0). then adds 65 to make it 'A'.
+             more specific example, if the key has A replaced with Q, then it goes through the text, if it finds a Q, it replaces it with 0 then adds 65 to make it A
+             Also the code adds 1000 just so it wont get confused when it cycles through.
+             */
             
-            char SDecryptKey[26];
-            printf("Enter Decryption Key:");
-            scanf("%s", SDecryptKey);
+            char SDecryptKey[26]; //initialise the array to receive the key
+            printf("Enter Decryption Key:"); // prompts the user to enter the key
+            scanf("%s", SDecryptKey); // scans user inputted key.
             
-            char DecryptionTextCopy[9999];
+            char DecryptionTextCopy[9999]; //now this is just a string that we write to cause otherwise theres a problem with the code (i dont understand c well enough to know why but this makes it work)
     
-            for(int i=0; i<strlen(SDecryptKey); i++){
-                for(int j=0; j<strlen(DecryptionText); j++){
-                    if(SDecryptKey[i] == DecryptionText[j] ){
-                        DecryptionTextCopy[j] = i+1000+65; // To Put it outside ascii range so it doesnt get confused with other characters
+            for(int i=0; i<strlen(SDecryptKey); i++){ //cycles through the key one letter at a time
+                for(int j=0; j<strlen(DecryptionText); j++){ //cycles through the text, one letter at a time
+                    if(SDecryptKey[i] == DecryptionText[j] || SDecryptKey[i] == (DecryptionText[j] - 32)){ //checks if the character that its at matches the character from where its at in the key. Works on both capitals and lowercase.
+                        DecryptionTextCopy[j] = i+1000+65; // makes the character equal to the decrypted ascii value the puts it outside ascii range so it doesnt get confused with other characters
                     }
                 }
             }
             
-            for(int l=0; l<strlen(DecryptionText); l++){
-                if(DecryptionText[l]>='A' && DecryptionText[l]<='Z'){
+            for(int l=0; l<strlen(DecryptionText); l++){ //just cycles through and makes each character back to its ascii value before it prints.
+                if(DecryptionText[l]>='A' && DecryptionText[l]<='Z' || DecryptionText[l]>='a' && DecryptionText[l]<='z'){
                     DecryptionTextCopy[l] = DecryptionTextCopy[l] - 1000;
                 }
                 else if(DecryptionText[l] == 32){
