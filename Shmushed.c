@@ -48,8 +48,9 @@ int main(){
         /*
          Here imma just initialising the string and reading user input to the string. This is the text that will be encrypted.
          */
-        
+        char x;
         char EncryptionText[9999];  //Initilasing array for the string.
+        scanf("%c", &x);
         printf("\n Enter Text for Encryption:"); //Prompts user to enter the text for encryption.
         scanf("%[^\n]s", EncryptionText);  // this should read to newline but doesnt work properly in compilers?
         
