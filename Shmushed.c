@@ -107,63 +107,71 @@ int main(){
                 if(EncryptionText[i]>='a' && EncryptionText[i]<='z'){ //this does the lower case letters.
                 EncryptionText[i] = EncryptKey[ ((int) EncryptionText[i]) - ((int) 'a')]; //The letter we are at is replaced by the relevant letter in the key. This is done by taking the letters ascii value, subtracting the value for 'a' from it (so we get a number 0 for a, 1 for b, 2 for c, etc. because the first entry in a string is the 0th entry.), then replacing it with the character that is that distance along the key array. e.g. 'a' becomes 0 then is replaced by the 0th entry (which is actually the first letter) in the key.
                 }
-                else if(EncryptionText[i]>='A' && EncryptionText[i]<='Z'){
+                else if(EncryptionText[i]>='A' && EncryptionText[i]<='Z'){ // this does capital letters, works exactly the same as lowercase letters, but adjusting for different ascii values of capitals.
                 EncryptionText[i] = EncryptKey[ ((int) EncryptionText[i]) - ((int) 'A' ) ]; 
                 }
             }
     
-            printf("%s", EncryptionText); 
-            return 0;
+            printf("%s", EncryptionText); //prints the encrypted text
+            return 0; //ends the code
 
         }
     }
-    else if(x == 2){
+    else if(x == 2){ //if decryption selected from menu
         
-        char x;
-        char DecryptionText[9999];
-        printf("\n Enter Text for Decryption:");
-        scanf("%c", &x);
-        scanf("%[^\n]s", DecryptionText);  // this should read to newline but doesnt work properly in compilers?
+        char x; // this somehow makes scanf work? idk why but it ignores this
+        char DecryptionText[9999]; //initialises array for text for decryption
+        printf("\n Enter Text for Decryption:"); //prompts user to enter text for decryption
+        scanf("%c", &x); // this somehow makes scanf work? idk why but it ignores this
+        scanf("%[^\n]s", DecryptionText);  //reads text to encrypt from stdin.
         
-        if(y == 1){
+        if(y == 1){ //if user selects rotation decryption with a key
             
-            int k=0;
-            printf("\nEnter Decryption Key:");
-            scanf("%d", &k);
+            int k=0; //initalises k to be used as the key
+            printf("\nEnter Decryption Key:"); // prompts user to enter decryption key
+            scanf("%d", &k); //scans entered text and stores as k, to be used in the mathsy bit to rotate it.
             
-            for(int i=0; i<=strlen(DecryptionText); i++){
+            for(int i=0; i<=strlen(DecryptionText); i++){ //goes through text one character at a time until it reaches the end
         
                 if(DecryptionText[i] == 32){
                     continue;   //32 is ASCII whitespace so this tells the code if it detects whitespace to not encrypt it.
                 }
-                else if(DecryptionText[i]>=65 && DecryptionText[i]<=90){
+                else if(DecryptionText[i]>=65 && DecryptionText[i]<=90){ //this is for capital letters
                     DecryptionText[i] = DecryptionText[i]-65 +26 ;  //Moves ASCII values to between 0 and 26 by substracting ASCII value for A
                     DecryptionText[i] = ((DecryptionText[i] - k)%26); //Rotates k places inversely around alphabet. The %[mod operand] ensures it works for letters later by skipping back to start of alphabet
                     DecryptionText[i] = DecryptionText[i]+65; //Moves values back to ASCII values.
                 }
-                else if(DecryptionText[i]>='a' && DecryptionText[i]<='z'){
+                else if(DecryptionText[i]>='a' && DecryptionText[i]<='z'){ //this is for lower case letters, works same as for capital letters, returning rotated letters as capitals
                     DecryptionText[i] = DecryptionText[i]-97+26; 
                     DecryptionText[i] = ((DecryptionText[i] - k )%26);   
-                    DecryptionText[i] = DecryptionText[i]+97;
+                    DecryptionText[i] = DecryptionText[i]+65;
                 }
         
             }
             
             
-            printf("%s", DecryptionText);  //Prints the String
+            printf("%s", DecryptionText);  //Prints the decrypted text
               
             return 0; //END of code
         }
-        else if(y == 2){
+        else if(y == 2){ //if rotation decryption without key is selected
+        
+        /*
+         k so this basically works by brute forcing every possible combination, and printing all combinations to the screen. It rotates through, and using a key of one, moves one rotation further each time, 
+         then prints that result to the screen before rotating one further and printing that to the screen. User then has to go through and see which one it is. Tells user which key it has.
+         */
                 
-            for(int k=1; k<=25; k++){                
-                for(int i=0; i<strlen(DecryptionText); i++){                
-                    if(DecryptionText[i]>=65 && DecryptionText[i]<=90){
-                        DecryptionText[i] = ((DecryptionText[i]-65+1)%26)+65;                       
+            for(int k=1; k<=25; k++){ //there are only 25 possible rotations (assuming it isnt already decrypted text), this just sets it up to go through 25 times.    
+                for(int i=0; i<strlen(DecryptionText); i++){ // goes through the text one character at time, and rotates it one place.   
+                    if(DecryptionText[i]>=65 && DecryptionText[i]<=90){ //for capital letters, rotates one place around the alphabet and returns capital letter.
+                        DecryptionText[i] = ((DecryptionText[i]-65+1)%26)+65; // lowers to between 1 and 26, adds on, then performs mod 26 takes remainder, then adds 65 to return to ascii values for capital letters.                 
                     }   
+                    if(DecryptionText[i]>='a' && DecryptionText[i]<='z'){ //for lowercase letters, rotates one place around the alphabet and returns a capital. works same as for capital letters
+                        DecryptionText[i] = ((DecryptionText[i]-'a'+1)%26)+65;                       
+                    } 
                 }   
-                int x=26 - k;
-                printf("\n%d: %s", x, DecryptionText);
+                int x=26 - k; //this is just so when it prints it prints the associated encryption, because it prints the 25th rotation first, then the 24th etc.
+                printf("\n%d: %s", x, DecryptionText); // prints the number of the rotation from the original (so the key used), and the text produced for that key.
             }
         }
         else if(y == 3){
