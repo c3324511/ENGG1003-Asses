@@ -1,11 +1,18 @@
-#include <stdio.h>
-#include <string.h>
+#include <stdio.h> // including this library so scanf() and printf() functions can be used.
+#include <string.h>  //including this library so the strlen() function can be used.
 
 
 int main(){
     
-    int x = 0;
-    int y = 0;
+    int x = 0; //initialising variable to use in the menu
+    int y = 0; //initialising variable to use in the sub menu
+    
+    /*
+     Okay so this menu works basically just by taking a user input and using that to initialise my variables. it asks for a value to put to 'x'
+     and then uses if statements to control what it asks for when initilising 'y'. If x is put to 1, it runs to the encryption meny, and if x is set 
+     to 2 it runs the decryption menu. If x is any other number it prints an error message and uses a goto statement (menu), to return to the start of the menu.
+     If y is a number not recognised in the menu it does the same thing. The initialiseed variables are then used later to tell which part of the code to run.
+     */
     
     menu: printf("\nSelect Encryption/Decrytpion: \n Enter 1 to Encrypt. \n Enter 2 to Decrypt. \n Entry:");
     scanf("%d", &x);
@@ -31,17 +38,31 @@ int main(){
         goto menu;
     }
     
+    /*
+     Here we just use a bit of flow control using if statetments to make it so only the selected part of the program runs. Works pretty much the same as the menu flow control, based on input values for x and y.
+     */
+    
     
     if(x == 1){
         
-        char EncryptionText[9999];
-        printf("\n Enter Text for Encryption:");
+        /*
+         Here imma just initialising the string and reading user input to the string. This is the text that will be encrypted.
+         */
+        
+        char EncryptionText[9999];  //Initilasing array for the string.
+        printf("\n Enter Text for Encryption:"); //Prompts user to enter the text for encryption.
         scanf("%[^\n]s", EncryptionText);  // this should read to newline but doesnt work properly in compilers?
         
         if(y == 1){
-            int k=0;
-            printf("/n Enter Encryption Key:");
-            scanf("%d", &k);
+            
+            /*
+             This section is for a rotation encryption. it works just by applying some maths to the ascii values of the numbers to rotate
+             them around a bit.
+             */
+            
+            int k=0; //initialising k which stores the key we use.
+            printf("/n Enter Encryption Key:"); //prompts user to enter the encryption key.
+            scanf("%d", &k); //scans entered key and stores as k.
             
             for(int i=0; i<=strlen(EncryptionText); i++){
         
