@@ -119,8 +119,10 @@ int main(){
     }
     else if(x == 2){
         
+        char x;
         char DecryptionText[9999];
         printf("\n Enter Text for Decryption:");
+        scanf("%c", &x);
         scanf("%[^\n]s", DecryptionText);  // this should read to newline but doesnt work properly in compilers?
         
         if(y == 1){
