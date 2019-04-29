@@ -70,37 +70,41 @@ int main(){
                     continue;   //32 is ASCII whitespace so this tells the code if it detects whitespace to not encrypt it.
                 }
                 else if(EncryptionText[i]>'Z' && EncryptionText[i]<'a'){
-                    continue;
+                    continue; //tells code not to encrypt anything thats not a letter.
                 }
                 else if(EncryptionText[i]>'z'){
-                    continue;
+                    continue; // also tells code not to encrypt non letters
                 }
-                else if(EncryptionText[i]>=65 && EncryptionText[i]<=90){
+                else if(EncryptionText[i]>=65 && EncryptionText[i]<=90){ //encryption for capital letters.
                     EncryptionText[i] = EncryptionText[i]-65;  //Moves ASCII values to between 0 and 26 by substracting ASCII value for A
-                    EncryptionText[i] = ((EncryptionText[i] + k)%26); //Rotates 13 places around alphabet. The % ensures it works for letters later by skipping back to start of alphabet
+                    EncryptionText[i] = ((EncryptionText[i] + k)%26); //Rotates k places around alphabet. The % ensures it works for letters later by skipping back to start of alphabet
                     EncryptionText[i] = EncryptionText[i]+65; //Moves values back to ASCII values.
                 }
-                else if(EncryptionText[i]>='a' && EncryptionText[i]<='z'){
-                    EncryptionText[i] = EncryptionText[i]-97; 
-                    EncryptionText[i] = ((EncryptionText[i] + k)%26);   
-                    EncryptionText[i] = EncryptionText[i]+65;
+                else if(EncryptionText[i]>='a' && EncryptionText[i]<='z'){ //encryption for lower case letters. returns them as capitals.
+                    EncryptionText[i] = EncryptionText[i]-97; //Moves ASCII values to between 0 and 26 by substracting ASCII value for a
+                    EncryptionText[i] = ((EncryptionText[i] + k)%26);   //Rotates k places around alphabet. The % ensures it works for letters later by skipping back to start of alphabet
+                    EncryptionText[i] = EncryptionText[i]+65; //Moves values to ASCII values for capital letters.
                 }
 
              }
         
-             printf("%s", EncryptionText);  //Prints the String
-             return 0;
+             printf("%s", EncryptionText);  //Prints the encrypted text
+             return 0;  //ends the code run. dont want it to run the rest when it doesnt need to.
         }
         else if(y == 2){
             
-            char EncryptKey[26];
-            printf("\n Enter Encryption Key:");
-            scanf("%s", EncryptKey);
-
-            for(int i = 0; i<=strlen(EncryptionText); i++){
+            /*
+             Here we got the substitution encryption. It works by doing some mathsy stuff and by using a letters value to tell it how far along the key string the replacement is, and to then replace it with that.
+             */
             
-                if(EncryptionText[i]>='a' && EncryptionText[i]<='z'){
-                EncryptionText[i] = EncryptKey[ ((int) EncryptionText[i]) - ((int) 'a')];
+            char EncryptKey[26]; //initalises an array to take a string used as the key
+            printf("\n Enter Encryption Key:"); //promts user to enter the key used for the encryption
+            scanf("%s", EncryptKey); //reads the key and stores it in the EncryptKey array.
+
+            for(int i = 0; i<=strlen(EncryptionText); i++){ //this loop is used to cylce through the text one letter at a time, until it reaches the value for the maximum in the string.
+            
+                if(EncryptionText[i]>='a' && EncryptionText[i]<='z'){ //this does the lower case letters.
+                EncryptionText[i] = EncryptKey[ ((int) EncryptionText[i]) - ((int) 'a')]; //The letter we are at is replaced by the relevant letter in the key. This is done by taking the letters ascii value, subtracting the value for 'a' from it (so we get a number 0 for a, 1 for b, 2 for c, etc. because the first entry in a string is the 0th entry.), then replacing it with the character that is that distance along the key array. e.g. 'a' becomes 0 then is replaced by the 0th entry (which is actually the first letter) in the key.
                 }
                 else if(EncryptionText[i]>='A' && EncryptionText[i]<='Z'){
                 EncryptionText[i] = EncryptKey[ ((int) EncryptionText[i]) - ((int) 'A' ) ]; 
