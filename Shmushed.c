@@ -2,6 +2,14 @@
 #include <string.h>  //including this library so the strlen() function can be used.
 
 
+/*
+ Yay so we got our code, allowing for Rotation and Substitution encryptions, as well as rot and sub decryptions with a key and a rot decryption without a key.
+ We have a user prompted menu for everything, so should be easy to follow what to do and what to press as the code runs.
+ All entries should be through stdin and all outputs are through stdout.
+ So just hit run and ill let the code tell you what to do.
+ */
+
+
 int main(){
     
     int x = 0; //initialising variable to use in the menu
@@ -14,28 +22,28 @@ int main(){
      If y is a number not recognised in the menu it does the same thing. The initialiseed variables are then used later to tell which part of the code to run.
      */
     
-    menu: printf("\nSelect Encryption/Decrytpion: \n Enter 1 to Encrypt. \n Enter 2 to Decrypt. \n Entry:");
-    scanf("%d", &x);
+    menu: printf("\nSelect Encryption/Decrytpion: \n Enter 1 to Encrypt. \n Enter 2 to Decrypt. \n Entry:"); //just tells the user what options are available
+    scanf("%d", &x); //scans selected option and uses that to select next menu. uses it later to go to right code for encryption/decryption
     
-    if(x == 1){
-        printf("\n Select Encryption Type: \n Enter 1 for Rotation Encryption. \n Enter 2 for Substitution Encryption.\n Entry:");
-        scanf("%d", &y);  
-        if(y != 1 && y != 2){
-            printf("\nEntry Not Recognised, Returning to Original menu.\n");
-            goto menu;
+    if(x == 1){ // if option 1 selected
+        printf("\n Select Encryption Type: \n Enter 1 for Rotation Encryption. \n Enter 2 for Substitution Encryption.\n Entry:"); //shows user options for sub menu
+        scanf("%d", &y);  //scans user input, uses it later to tell which encryption to use
+        if(y != 1 && y != 2){ //if a number thats not one of the options is selected
+            printf("\nEntry Not Recognised, Returning to Original menu.\n"); //prints error message to user
+            goto menu; //jumps to first menu. This can be also used as a back button (like if you accidently selected encryption instead of decryption)
         }
     }
-    else if(x == 2){
-        printf("\n Select Decryption Type. \n Enter 1 for Rotation Decryption with Key. \n Enter 2 for Rotation Decryption without Key. \n Enter 3 for Substitution Decryption with Key. \n Entry:");
-        scanf("%d", &y); 
-        if(y != 1 && y != 2 && y!=3){
-            printf("\nEntry Not Recognised, Returning to Original menu.\n");
-            goto menu;
+    else if(x == 2){ //if option 2 is selected
+        printf("\n Select Decryption Type. \n Enter 1 for Rotation Decryption with Key. \n Enter 2 for Rotation Decryption without Key. \n Enter 3 for Substitution Decryption with Key. \n Entry:"); //prints options available for user
+        scanf("%d", &y); //scans uer input, uses it later to tell which decryption to use
+        if(y != 1 && y != 2 && y!=3){ //if a number other than one of the options is selected
+            printf("\nEntry Not Recognised, Returning to Original menu.\n"); //prints error message to user
+            goto menu; //jumps to first menu. This can be also used as a back button (like if you accidently selected encryption instead of decryption)
         }
     }
-    else if(x != 1 && x != 2){
-        printf("\nEntry Not Recognised, Try Again.\n");
-        goto menu;
+    else if(x != 1 && x != 2){ //if number not one of the options is selected
+        printf("\nEntry Not Recognised, Try Again.\n"); //prints error message
+        goto menu; //prints menu again and waits for selection
     }
     
     /*
